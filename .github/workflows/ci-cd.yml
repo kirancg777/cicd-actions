@@ -1,17 +1,53 @@
+# name: CI/CD
+
+# on:
+#   push:
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     container: node:16
+#     steps:
+#       - run: node --version
+#       - run: npm --version
+#       - uses: actions/checkout@v3
+#       - run: npm install
+#       - run: node app.js
+
+
 name: CI/CD
 
 on:
   push:
+    branches:
+      - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: node:16
+
     steps:
-      - run: node --version
-      - run: npm --version
-      - uses: actions/checkout@v3
-      - run: npm install
-      - run: node app.js
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Minikube
+        run: |
+          curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+          sudo install minikube-linux-amd64 /usr/local/bin/minikube
+          minikube start
+
+      - name: Build and tag Docker image
+        run: |
+          docker build -t nodeapp:latest .
+          docker tag nodeapp:latest kirancg/nodeapp:latest
+
+      - name: Push Docker image to registry
+        run: |
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+          docker push kirancg/nodeapp:latest
+
+      - name: Deploy to Kubernetes cluster
+        run: |
+          kubectl apply -f kubernetes/      
 
 
     
