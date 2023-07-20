@@ -23,7 +23,7 @@ jobs:
         run: |
           echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
           docker pull kirancg/k8s
-
+   
       - name: Deploy to Kubernetes cluster
         run: |
           kubectl apply -f kubernetes/      
@@ -33,12 +33,25 @@ jobs:
 
       - name: Get pod status
         run: kubectl get pods
+        
+      - name: Get pod status
+        run: kubectl get pods
+        
+      - name: Get pod status
+        run: kubectl get pods 
+        
+      - name: Get pod status
+        run: kubectl get pods 
+      - name: Get pod status
+        run: kubectl get pods  
+      - name: Get pod status
+        run: kubectl get pods
+        
 
       - name: Get Services
         run: kubectl get svc
 
-      - name: Access to url 
-        run: minikube service k8s    
+        
 
    
 
