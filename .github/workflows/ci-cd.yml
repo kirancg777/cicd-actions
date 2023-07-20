@@ -29,16 +29,10 @@ jobs:
           kubectl apply -f deployment.yaml     
       - name: Get deployment status
         run: kubectl get deployments
-      - name: Get pod status
-        run: kubectl get pods
-      - name: Get pod status
-        run: kubectl get pods
-      - name: Get pod status
-        run: kubectl get pods   
+      - name: Get Namespaces
+        run: kubectl get namespaces
       - name: Get pod status
         run: kubectl get pods 
-      - name: Get pod status
-        run: kubectl get pods  
       - name: Apply Services
         run: kubectl apply -f service.yaml
       - name: Get SVC
