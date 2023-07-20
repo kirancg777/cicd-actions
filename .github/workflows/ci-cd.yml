@@ -26,7 +26,7 @@ jobs:
    
       - name: Deploy to Kubernetes cluster
         run: |
-          kubectl apply -f kubernetes/      
+          kubectl apply -f deployment.yaml     
       - name: Get deployment status
         run: kubectl get deployments
       - name: Get pod status
