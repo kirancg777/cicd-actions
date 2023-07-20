@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nodeapp
+  name: k8s
 spec:
+  replicas: 4
   selector:
     matchLabels:
-      app: nodeapp
+      app: k8s
   template:
     metadata:
       labels:
-        app: nodeapp
+        app: k8s
     spec:
       containers:
-      - name: cicdnode
-        image: kirancg/nodeapp:latest
+      - name: k8s
+        image: kirancg/k8s
         resources:
           limits:
             memory: "128Mi"
             cpu: "250m"
         ports:
         - containerPort: 3000
-
