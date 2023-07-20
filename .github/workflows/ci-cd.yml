@@ -39,10 +39,10 @@ jobs:
         run: kubectl get pods 
       - name: Get pod status
         run: kubectl get pods  
-      - name: Wait for pod status is Ready
-        run: kubectl wait pods -n default -l run=k8s --for condition=Ready --timeout=120s
-      - name: Get Services
-        run: kubectl get svc
+      - name: Apply Services
+        run: kubectl apply -f service.yaml
+      - name: Get SVC
+        run: minikube service k8s
 
         
 
