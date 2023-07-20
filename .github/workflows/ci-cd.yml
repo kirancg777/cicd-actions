@@ -51,9 +51,15 @@ jobs:
 
       - name: Get deployment status
         run: kubectl get deployments
-
+        
+      - name: get services
+        run: kubectl get svc
+        
       - name: Get pod status
         run: kubectl get pods
+        
+      - name: Acess the url
+        run: minikube service nodeapp
 
    
 
